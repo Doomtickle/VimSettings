@@ -171,6 +171,13 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 
+"/
+"/ Emmet.vim
+"/
+imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")             "set tab as autoexpander
+
+
+
 "--------------Auto-Commands-------------"
 "Automatically source the Vimrc on save.
 augroup autosourcing
