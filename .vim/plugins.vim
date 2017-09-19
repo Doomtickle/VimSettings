@@ -23,9 +23,16 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'stephpy/vim-php-cs-fixer'
 Plugin 'tobyS/vmustache'
 Plugin 'tobyS/pdv'
-Plugin 'SirVer/ultisnips'
 Plugin 'jwalton512/vim-blade'
 Plugin 'mattn/emmet-vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'captbaritone/better-indent-support-for-php-with-html'
+Plugin 'godlygeek/tabular'
+Plugin 'vim-scripts/BufOnly.vim'
+Plugin 'othree/html5.vim'
+
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required

@@ -3,27 +3,32 @@ set nocompatible              " be iMproved, required
 so ~/.vim/plugins.vim
 
 syntax enable
-set backspace=indent,eol,start
-let mapleader = ','			                "Change the leader to comma.	
-set nonumber				                "No numbers by default, I'll call them if i need	
-set noerrorbells visualbell t_vb=           "No damn bells!
-set autowriteall                            "Automatically write the file when switching buffers.
-set complete=.,w,b,u                        "Set up auto-complete
-set tabstop=4
 set expandtab
-set softtabstop=4
+set tabstop=4
 set shiftwidth=4
+set softtabstop=4
+set backspace=indent,eol,start
+set noerrorbells visualbell t_vb=           "No damn bells!
+set complete=.,w,b,u                        "Set up auto-complete
+let mapleader = ','                         "Change the leader to comma.
+set dir=~/tmp                               "directory for swap files
 set ignorecase                              "ignore case when searching
 set smartcase                               "ignore case if all lowercase
+set swapfile                                "swap files in case vim crashes
+set nonumber				                "No numbers by default, I'll call them if i need	
+set autowriteall                            "Automatically write the file when switching buffers.
 
+nmap j gj
+nmap k gk
+nmap Q @q
+vnoremap y ygv<ESC>
  
 
 
 "--------------Visuals-------------"
-colorscheme atom-dark
+colorscheme afterglow
 set t_CO=256				"256 colors forced"
-set macligatures			"Ligature support"
-set guifont=Fira_Code:h15 
+set guifont=OperatorMono-Book:h15 
 set guioptions-=e			"no gui tabs"
 set linespace=15			"1.5 line height (MacVim specific)"
 
@@ -40,6 +45,8 @@ hi foldcolumn guibg=bg
 "get rid of ugly split borders
 hi vertsplit guifg=bg guibg=bg
 
+"italic comments
+highlight Comment gui=italic
 
 "--------------Split Management-------------"
 
@@ -57,9 +64,9 @@ nmap sp :split<cr>
 
 
 "--------------Search-------------"
-set hlsearch					"Highlights search terms
-set incsearch					"Incremental search functionality
-nmap <Leader><space> :nohlsearch <cr>		"Easily remove highlights
+set hlsearch	                				"Highlights search terms
+set incsearch				                	"Incremental search functionality
+nmap <Leader><space> :nohlsearch<cr>		    
 
 
 
@@ -79,6 +86,9 @@ nmap <Leader>w :w!<cr>
 "Make nerdtree easier to toggle
 nmap <D-1> :NERDTreeToggle<cr>
 
+"Fast switch to normal mode
+imap jj <ESC>
+
 "Find a specific tag
 nmap <Leader>f :tag<space>
 
@@ -92,6 +102,7 @@ nmap <Leader>lm :!php artisan make:
 nmap <Leader><Leader>c :e app/Http/Controllers/<cr>
 nmap <Leader><Leader>m :e app/<cr>
 nmap <Leader><Leader>v :e resources/views/<cr>
+nmap <Leader><Leader>d :e database/migrations/<cr>
 
 
 "----------------Plugins----------------"
@@ -99,12 +110,24 @@ nmap <Leader><Leader>v :e resources/views/<cr>
 "/
 "/ CtrlP
 "/
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 let g:ctrlp_custom_ignore = 'node_modules\DS_Store\|git'
 let g:ctrlp_match_window = 'top,order:ttb,min:1,max:30,results:30'
 
 nmap <D-p> :CtrlP<cr>
 nmap <D-r> :CtrlPBufTag<cr>
 nmap <D-e> :CtrlPMRUFiles<cr>
+
+
+"/
+"/ Tabular
+"/
+  nmap <Leader>a= :Tab /=<CR>
+  vmap <Leader>a= :Tab /=<CR>
+  nmap <Leader>a: :Tab /:\zs<CR>
+  vmap <Leader>a: :Tab /:\zs<CR>
+  nmap <Leader>a> :Tab /=><CR>
+  vmap <Leader>a> :Tab /=><CR>
 
 
 "/
@@ -124,6 +147,7 @@ let g:grep_cmd_opts = '--line-numbers --noheading'
 "/ NERDTree
 "/
 let NERDTreeHijackNetrw = 0
+let NERDTreeShowHidden=1
 
 
 "/
@@ -179,6 +203,8 @@ imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")             "set tab as 
 
 
 
+
+
 "--------------Auto-Commands-------------"
 "Automatically source the Vimrc on save.
 augroup autosourcing
@@ -191,7 +217,7 @@ function! IPhpInsertUse()
     call PhpInsertUse()
     call feedkeys('a',  'n')
 endfunction
-autocmd FileType php inoremap <Leader>n <Esc>:call IPhpInsertUse()<CR>
+autocmd FileType php inoremap <Leader required>n <Esc>:call IPhpInsertUse()<CR>
 autocmd FileType php noremap <Leader>n :call PhpInsertUse()<CR>
 
 "Fully qualified namespaces
